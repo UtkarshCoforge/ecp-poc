@@ -18,3 +18,7 @@ variable "az_a" {
   description = "Availability Zone A"
   type        = string
 }
+
+variable "region" {
+  default = "us-east-1"
+}

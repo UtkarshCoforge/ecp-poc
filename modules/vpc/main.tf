@@ -1,3 +1,7 @@
+provider "aws" {
+  region = var.region  # Change to your desired region
+}
+
 resource "aws_vpc" "main" {
   cidr_block = var.cidr_block
   enable_dns_support = true

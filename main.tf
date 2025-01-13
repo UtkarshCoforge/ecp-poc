@@ -38,3 +38,13 @@ module "ec2" {
   iam_instance_profile = module.iam.ec2_instance_profile
   instance_name        = "my-ec2-ssm-instance"
 }
+
+# terraform {
+#   backend "s3" {
+#     bucket         = "terraform-state-bucket"
+#     key            = "terraform/ecp-poc/terraform.tfstate"
+#     region         = "us-east-1"
+#     dynamodb_table = "terraform-lock-table"
+#     encrypt        = true
+#   }
+# }

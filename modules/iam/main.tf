@@ -1,3 +1,7 @@
+provider "aws" {
+  region = var.region  # Change to your desired region
+}
+
 resource "aws_iam_role" "ssm_role" {
   name = "EC2SSMRole"
   

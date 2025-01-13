@@ -1,3 +1,7 @@
+provider "aws" {
+  region = var.region  # Change to your desired region
+}
+
 resource "aws_instance" "web" {
   ami             = var.ami_id
   instance_type   = var.instance_type
@@ -23,7 +27,7 @@ output "instance_id" {
 }
 
 output "private_ip" {
-  value = aws_instance.ec2.private_ip
+  value = aws_instance.web.private_ip
 }
 
 # Create a Security Group
