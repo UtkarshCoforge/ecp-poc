@@ -39,12 +39,54 @@ module "ec2" {
   instance_name        = "my-ec2-ssm-instance"
 }
 
+# resource "aws_s3_bucket" "terraform_state" {
+#   bucket = "terraform-state-bucket"
+# }
+
+# data "aws_iam_policy_document" "backend" {
+#   statement {
+#     principals {
+#       type        = "AWS"
+#       identifiers = ["442426854264"]
+#     }
+
+#     actions = [
+#       "s3:GetObject",
+#       "s3:ListBucket",
+#     ]
+
+#     resources = [
+#       "arn:aws:s3:::terraform_state/backend/state",
+#       "arn:aws:s3:::terraform_state/backend/state",
+#     ]
+#   }
+# }
+
+# resource "aws_s3_bucket_policy" "backend" {
+#   bucket = aws_s3_bucket.terraform_state.id
+#   policy = data.aws_iam_policy_document.backend.json
+# }
+
+
+# resource "aws_dynamodb_table" "terraform_lock" {
+#   name         = "terraform-lock-table"
+#   billing_mode = "PAY_PER_REQUEST"
+#   hash_key     = "LockID"
+
+#   attribute {
+#     name = "LockID"
+#     type = "S"
+#   }
+# }
+
+
 # terraform {
 #   backend "s3" {
 #     bucket         = "terraform-state-bucket"
-#     key            = "terraform/ecp-poc/terraform.tfstate"
+#     key            = "backend/state"
 #     region         = "us-east-1"
 #     dynamodb_table = "terraform-lock-table"
 #     encrypt        = true
 #   }
 # }
+
