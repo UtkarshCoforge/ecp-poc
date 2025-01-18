@@ -80,13 +80,13 @@ module "ec2" {
 # }
 
 
-# terraform {
-#   backend "s3" {
-#     bucket         = "terraform-state-bucket"
-#     key            = "backend/state"
-#     region         = "us-east-1"
-#     dynamodb_table = "terraform-lock-table"
-#     encrypt        = true
-#   }
-# }
+terraform {
+  backend "s3" {
+    bucket         = "tfstate-89"
+    key            = "tfstateFile"
+    region         = "us-east-1"
+    dynamodb_table = "terraform-lock-table"
+    encrypt        = true
+  }
+}
 
