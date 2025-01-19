@@ -34,7 +34,7 @@ output "private_ip" {
 # Create a Security Group
 resource "aws_security_group" "ec2_sg" {
   name_prefix = "ec2-sg-"
-  vpc_id      = aws_instance.web.vpc_id
+  vpc_id      = aws_vpc.main.vpc_id
 
 
   ingress {
