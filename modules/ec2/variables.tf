@@ -26,3 +26,8 @@ variable "instance_name" {
 variable "region" {
   default = "us-east-1"
 }
+
+variable "security_group_id" {
+  description = "The security group IDs to associate with the EC2 instance."
+  type        = list(string)  
+}

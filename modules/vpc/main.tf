@@ -65,6 +65,32 @@ resource "aws_route" "nat_route" {
   nat_gateway_id         = aws_nat_gateway.nat.id
 }
 
+# Create a Security Group
+resource "aws_security_group" "ec2_sg" {
+  name_prefix = "ec2-sg-"
+  vpc_id      = aws_vpc.main.id
+
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # No inbound access allowed
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"] # Allow all outbound traffic
+  }
+}
+
 output "vpc_id" {
   value = aws_vpc.main.id
+}
+
+output "security_group_id" {
+  value = aws_security_group.ec2_sg.id
+  
 }
