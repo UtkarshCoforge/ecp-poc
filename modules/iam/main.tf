@@ -27,11 +27,21 @@ resource "aws_iam_policy" "ssm_policy" {
     Statement = [
       {
         Action = [
-          "ssm:DescribeInstanceInformation",
-          "ssm:GetCommandInvocation",
-          "ssm:ListCommands",
-          "ssm:SendCommand",
-          "ssm:UpdateInstanceInformation"
+                "ssm:DescribeAssociation",
+                "ssm:GetDeployablePatchSnapshotForInstance",
+                "ssm:GetDocument",
+                "ssm:DescribeDocument",
+                "ssm:GetManifest",
+                "ssm:GetParameter",
+                "ssm:GetParameters",
+                "ssm:ListAssociations",
+                "ssm:ListInstanceAssociations",
+                "ssm:PutInventory",
+                "ssm:PutComplianceItems",
+                "ssm:PutConfigurePackageResult",
+                "ssm:UpdateAssociationStatus",
+                "ssm:UpdateInstanceAssociationStatus",
+                "ssm:UpdateInstanceInformation"
         ]
         Effect = "Allow"
         Resource = "*"
