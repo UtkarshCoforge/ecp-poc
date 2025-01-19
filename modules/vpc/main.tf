@@ -65,6 +65,24 @@ resource "aws_route" "nat_route" {
   nat_gateway_id         = aws_nat_gateway.nat.id
 }
 
+resource "aws_vpc_endpoint" "ssm" {
+  vpc_id             = aws_vpc.main.id
+  service_name       = "com.amazonaws.us-east-1.ssm"
+  route_table_ids    = [aws_route_table.private_rt.id]
+}
+
+resource "aws_vpc_endpoint" "ec2messages" {
+  vpc_id             = aws_vpc.main.id
+  service_name       = "com.amazonaws.us-east-1.ec2messages"
+  route_table_ids    = [aws_route_table.private_rt.id]
+}
+
+resource "aws_vpc_endpoint" "ssmmessages" {
+  vpc_id             = aws_vpc.main.id
+  service_name       = "com.amazonaws.us-east-1.ssmmessages"
+  route_table_ids    = [aws_route_table.private_rt.id]
+}
+
 # Create a Security Group
 resource "aws_security_group" "ec2_sg" {
   name_prefix = "ec2-sg-"
