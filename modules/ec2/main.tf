@@ -7,7 +7,7 @@ resource "aws_instance" "web" {
   instance_type   = var.instance_type
   subnet_id       = var.subnet_id
   iam_instance_profile = var.iam_instance_profile
-  security_groups = aws_security_group.ec2_sg.id
+  vpc_security_group_ids = [aws_security_group.ec2_sg.id]
   tags = {
     Name = var.instance_name
   }
