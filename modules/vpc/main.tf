@@ -68,19 +68,25 @@ resource "aws_route" "nat_route" {
 resource "aws_vpc_endpoint" "ssm" {
   vpc_id             = aws_vpc.main.id
   service_name       = "com.amazonaws.us-east-1.ssm"
-  route_table_ids    = [aws_route_table.private_rt.id]
+  vpc_endpoint_type  = "Interface"
+  subnet_ids         = [aws_subnet.subnet-a.id]
+  security_group_ids = [aws_security_group.ec2_sg.id]
 }
 
 resource "aws_vpc_endpoint" "ec2messages" {
   vpc_id             = aws_vpc.main.id
   service_name       = "com.amazonaws.us-east-1.ec2messages"
-  route_table_ids    = [aws_route_table.private_rt.id]
+  vpc_endpoint_type  = "Interface"
+  subnet_ids         = [aws_subnet.subnet-a.id]
+  security_group_ids = [aws_security_group.ec2_sg.id]
 }
 
 resource "aws_vpc_endpoint" "ssmmessages" {
   vpc_id             = aws_vpc.main.id
   service_name       = "com.amazonaws.us-east-1.ssmmessages"
-  route_table_ids    = [aws_route_table.private_rt.id]
+  vpc_endpoint_type  = "Interface"
+  subnet_ids         = [aws_subnet.subnet-a.id]
+  security_group_ids = [aws_security_group.ec2_sg.id]
 }
 
 # Create a Security Group
