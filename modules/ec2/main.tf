@@ -35,12 +35,13 @@ output "private_ip" {
 resource "aws_security_group" "ec2_sg" {
   name_prefix = "ec2-sg-"
   vpc_id      = aws_instance.web.vpc_id
+  
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = [] # No inbound access allowed
+    cidr_blocks = ["0.0.0.0/0"] # No inbound access allowed
   }
 
   egress {
