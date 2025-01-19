@@ -7,6 +7,7 @@ resource "aws_instance" "web" {
   instance_type   = var.instance_type
   subnet_id       = var.subnet_id
   iam_instance_profile = var.iam_instance_profile
+  security_groups = aws_security_group.ec2_sg.id
   tags = {
     Name = var.instance_name
   }
@@ -35,9 +36,9 @@ resource "aws_security_group" "ec2_sg" {
   name_prefix = "ec2-sg-"
 
   ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
     cidr_blocks = [] # No inbound access allowed
   }
 
