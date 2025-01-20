@@ -22,11 +22,13 @@ resource "aws_iam_role" "ssm_role" {
 resource "aws_iam_policy" "ssm_policy" {
   name        = "SSMPolicy"
   description = "Allow EC2 instances to communicate with Systems Manager"
-  policy      = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = [
+  policy      = jsonencode(
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
                 "ssm:DescribeAssociation",
                 "ssm:GetDeployablePatchSnapshotForInstance",
                 "ssm:GetDocument",
@@ -42,22 +44,33 @@ resource "aws_iam_policy" "ssm_policy" {
                 "ssm:UpdateAssociationStatus",
                 "ssm:UpdateInstanceAssociationStatus",
                 "ssm:UpdateInstanceInformation"
-        ]
-        Effect = "Allow"
-        Resource = "*"
-      },
-      {
-        Action   = "ec2messages:*"
-        Effect   = "Allow"
-        Resource = "*"
-      },
-      {
-        Action   = "ssm:ListAssociations"
-        Effect   = "Allow"
-        Resource = "*"
-      }
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssmmessages:CreateControlChannel",
+                "ssmmessages:CreateDataChannel",
+                "ssmmessages:OpenControlChannel",
+                "ssmmessages:OpenDataChannel"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2messages:AcknowledgeMessage",
+                "ec2messages:DeleteMessage",
+                "ec2messages:FailMessage",
+                "ec2messages:GetEndpoint",
+                "ec2messages:GetMessages",
+                "ec2messages:SendReply"
+            ],
+            "Resource": "*"
+        }
     ]
-  })
+})
 }
 
 resource "aws_iam_role_policy_attachment" "ssm_attach" {
