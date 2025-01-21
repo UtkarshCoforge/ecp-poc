@@ -18,11 +18,11 @@ module "iam" {
 data "aws_ami" "linux-ami" {
   most_recent = true
   owners      = ["amazon"]
-  
+
   filter {
     name   = "name"
     # values = ["amzn2-ami-amd-hvm-2.0.20230727.0-x86_64-gp2"]
-    values = ["amzn-ami-*-x86_64-gp2"]
+    values = ["amzn2-ami-hvm*"]
 
   }
   filter {
