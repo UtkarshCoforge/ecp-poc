@@ -15,7 +15,7 @@ resource "aws_subnet" "subnet-a" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = var.subnet_a_cidr
   availability_zone = var.az_a
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = false
   tags = {
     Name = "Subnet Dev"
   }
@@ -37,13 +37,13 @@ resource "aws_internet_gateway" "gw" {
 #   }
 # }
 
-resource "aws_nat_gateway" "nat" {
-  allocation_id = aws_eip.nat.id
-  subnet_id     = aws_subnet.subnet-a.id
-  tags = {
-    Name = "nat-gateway"
-  }
-}
+# resource "aws_nat_gateway" "nat" {
+#   allocation_id = aws_eip.nat.id
+#   subnet_id     = aws_subnet.subnet-a.id
+#   tags = {
+#     Name = "nat-gateway"
+#   }
+# }
 
 # Create a Route Table for the Private Subnet
 resource "aws_route_table" "private_rt" {
