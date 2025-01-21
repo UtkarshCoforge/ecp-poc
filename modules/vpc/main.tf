@@ -59,10 +59,10 @@ resource "aws_route_table_association" "private_rt_assoc" {
   route_table_id = aws_route_table.private_rt.id
 }
 
-# resource "aws_route_table_association" "intrnt_gw" {
-#   gateway_id     = aws_internet_gateway.gw.id
-#   route_table_id = aws_route_table.private_rt.id
-# }
+resource "aws_route_table_association" "intrnt_gw" {
+  gateway_id     = aws_internet_gateway.gw.id
+  route_table_id = aws_route_table.private_rt.id
+}
 # Add a route to the NAT Gateway
 # resource "aws_route" "nat_route" {
 #   route_table_id         = aws_route_table.private_rt.id
