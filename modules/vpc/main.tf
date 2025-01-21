@@ -59,15 +59,15 @@ resource "aws_route_table_association" "private_rt_assoc" {
   route_table_id = aws_route_table.private_rt.id
 }
 
-resource "aws_route_table_association" "intrnt_gw" {
-  gateway_id     = aws_internet_gateway.gw.id
-  route_table_id = aws_route_table.private_rt.id
-}
+# resource "aws_route_table_association" "intrnt_gw" {
+#   gateway_id     = aws_internet_gateway.gw.id
+#   route_table_id = aws_route_table.private_rt.id
+# }
 # Add a route to the NAT Gateway
 # resource "aws_route" "nat_route" {
 #   route_table_id         = aws_route_table.private_rt.id
 #   destination_cidr_block = "0.0.0.0/0"
-#   nat_gateway_id         = aws_nat_gateway.nat.id
+#   gateway_id             = aws_internet_gateway.gw.id
 # }
 
 resource "aws_vpc_endpoint" "ssm" {
@@ -104,13 +104,13 @@ resource "aws_security_group" "ec2_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/16"] # No inbound access allowed
+    cidr_blocks = ["10.0.1.0/24"] # No inbound access allowed
   }
   ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/16"] # No inbound access allowed
+    cidr_blocks = ["10.0.1.0/24"] # No inbound access allowed
   }
 
   egress {
