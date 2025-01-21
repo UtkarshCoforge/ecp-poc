@@ -15,26 +15,26 @@ module "iam" {
   role_name       = "EC2SSMRole"
 }
 
-data "aws_ami" "linux-ami" {
-  most_recent = true
-  owners      = ["amazon"]
+# data "aws_ami" "linux-ami" {
+#   most_recent = true
+#   owners      = ["amazon"]
 
-  filter {
-    name   = "name"
-    # values = ["amzn2-ami-amd-hvm-2.0.20230727.0-x86_64-gp2"]
-    values = ["amzn2-ami-hvm*"]
+#   filter {
+#     name   = "name"
+#     # values = ["amzn2-ami-amd-hvm-2.0.20230727.0-x86_64-gp2"]
+#     values = ["amzn2-ami-hvm*"]
 
-  }
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-}
+#   }
+#   filter {
+#     name   = "virtualization-type"
+#     values = ["hvm"]
+#   }
+# }
 
 
 module "ec2" {
   source               = "./modules/ec2"
-  ami_id               = data.aws_ami.linux-ami.id  # Replace with a valid AMI ID
+  ami_id               = "ami-0df8c184d5f6ae949"  # Replace with a valid AMI ID
   instance_type        = "t2.micro"
   security_group_id    = [module.vpc.security_group_id]
   subnet_id            = module.vpc.subnet_a_id
