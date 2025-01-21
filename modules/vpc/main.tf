@@ -15,7 +15,7 @@ resource "aws_subnet" "subnet-a" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = var.subnet_a_cidr
   availability_zone = var.az_a
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = false
   tags = {
     Name = "Subnet Dev"
   }
@@ -89,6 +89,14 @@ resource "aws_vpc_endpoint" "ec2messages" {
 resource "aws_vpc_endpoint" "ssmmessages" {
   vpc_id             = aws_vpc.main.id
   service_name       = "com.amazonaws.us-east-1.ssmmessages"
+  vpc_endpoint_type  = "Interface"
+  subnet_ids         = [aws_subnet.subnet-a.id]
+  security_group_ids = [aws_security_group.ec2_sg.id]
+}
+
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id             = aws_vpc.main.id
+  service_name       = "com.amazonaws.us-east-1.s3"
   vpc_endpoint_type  = "Interface"
   subnet_ids         = [aws_subnet.subnet-a.id]
   security_group_ids = [aws_security_group.ec2_sg.id]
