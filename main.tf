@@ -18,7 +18,7 @@ module "iam" {
 data "aws_ami" "linux-ami" {
   filter {
     name   = "name"
-    values = ["Amazon Linux 2023 AMI 2023.6.20250115.0 x86_64 HVM kernel-6.1"]
+    values = ["Amazon Linux 2 Kernel 5.10 AMI 2.0.20250116.0 x86_64 HVM gp2"]
 
   }
   filter {
