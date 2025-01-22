@@ -41,6 +41,7 @@ resource "aws_internet_gateway" "gw" {
 
 # Create a NAT IP & Gateway
 resource "aws_eip" "nat-gateway-ip" {
+  domain = "vpc"
   tags = {
 
     Name = "nat-eip"
